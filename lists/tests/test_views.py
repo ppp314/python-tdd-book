@@ -59,6 +59,12 @@ class ListViewTest(TestCase):
         response = self.client.get(f"/lists/{correct_list.id}/")
         self.assertEqual(response.context["list"], correct_list)
 
+    def test_displays_item_form(self):
+        list_ = List.objects.create()
+        response = self.client.get(f"/lists/{list_.id}/")
+        self.assertIsInstance(response.context["form"], ItemForm)
+        self.assertContains(response, 'name="text"')
+
     def test_displays_only_items_for_that_lits(self):
         correct_list = List.objects.create()
         Item.objects.create(text="itemey 1", list=correct_list)
@@ -99,18 +105,6 @@ class ListViewTest(TestCase):
         )
 
         self.assertRedirects(response, f"/lists/{correct_list.id}/")
-
-    def test_displays_item_form(self):
-        list_ = List.objects.create()
-        response = self.client.get(f"/lists/{list_.id}/")
-        self.assertIsInstance(response.context["form"], ItemForm)
-        self.assertContains(response, 'name="text"')
-
-    def test_displays_item_form(self):
-        list_ = List.objects.create()
-        response = self.client.get(f"/lists/{list_.id}/")
-        self.assertIsInstance(response.context["form"], ItemForm)
-        self.assertContains(response, 'name="text"')
 
     def post_invalid_input(self):
         list_ = List.objects.create()
