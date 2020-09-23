@@ -1,3 +1,5 @@
 $('input[name="text"]').on('keypress', function () {
-    $('.has-error').hide();
+  console.log('in keypress handler');
+  $('.has-error').hide();
 });
+console.log('list.js loaded');
