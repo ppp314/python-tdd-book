@@ -1,3 +1,4 @@
+import pprint
 from fabric.api import run
 from fabric.context_managers import settings, shell_env
 
@@ -14,7 +15,7 @@ def reset_database(host):
 
 def _get_server_env_vars(host):
     env_lines = run(f"cat ~/sites/{host}/.env").splitlines()
-    print (l.split("=") for l in env_lines if l)
+    pprint.pp(l.split("=") for l in env_lines if l)
     return dict(l.split("=") for l in env_lines if l)
 
 
