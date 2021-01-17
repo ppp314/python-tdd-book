@@ -15,8 +15,8 @@ def reset_database(host):
 
 def _get_server_env_vars(host):
     env_lines = run(f"cat ~/sites/{host}/.env").splitlines()
-    import pdb; pdb.set_trace()
-    return dict(l.split("=") for l in env_lines if l)
+    env_lines_modified=env_lines[2:]
+    return dict(l.split("=") for l in env_lines_modified if l)
 
 
 def create_session_on_server(host, email):
