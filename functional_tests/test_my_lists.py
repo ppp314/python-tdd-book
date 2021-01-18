@@ -1,10 +1,7 @@
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from .base import FunctionalTest
 from .server_tools import create_session_on_server
 from .management.commands.create_session import create_pre_authenticated_session
-
-User = get_user_model()
 
 
 class MyListsTest(FunctionalTest):
